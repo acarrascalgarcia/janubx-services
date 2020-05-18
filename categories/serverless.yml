@@ -22,7 +22,9 @@ provider:
   region: us-east-1
   stage: test
   environment:
+    BASE_URL: {"Fn::Join": ["", ["https://", {"Ref": "ApiGatewayRestApi"}, ".execute-api.${self:provider.region}.amazonaws.com/${opt:stage, self:provider.stage}"]]}
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}-table
+    SERVICE_VERSION: v1
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -43,6 +45,18 @@ functions:
           path: ping
           method: get
           cors: true
+  create-categories-service:
+    handler: apps.categories.api.create_category
+    events:
+      - http:
+          path: categories
+          method: post
+          cors: true
+          integration: lambda
+          response:
+            headers:
+              Content-Type: "'application/json'"
+            template: $input.json('$.body')
 
 resources:
   Resources:
