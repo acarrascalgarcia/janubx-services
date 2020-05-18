@@ -54,8 +54,7 @@ All fields example:
 
 **Code** : `200 OK`
 
-**Content example** : Response will reflect back the created information. A
-User with `id` of '1234' sets their name, passing `UAPP` header of 'ios1_2':
+**Content example** : Response will reflect back the created information.
 
 ```json
 {
