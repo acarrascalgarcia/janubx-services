@@ -1,8 +1,8 @@
 # Create Category
 
-Allow the user to create funds.
+Allow the user to create categories.
 
-**URL** : `any-url/<:stage>>/categories`
+**URL** : `/<:stage>/categories`
 
 **Method** : `POST`
 
