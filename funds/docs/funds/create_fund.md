@@ -2,7 +2,7 @@
 
 Allow the user to create funds.
 
-**URL** : `any-url/<:stage>>/funds`
+**URL** : `/<:stage>/funds`
 
 **Method** : `POST`
 
