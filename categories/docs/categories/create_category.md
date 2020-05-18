@@ -27,9 +27,9 @@ Minimal fields example:
 
 ```json
 {
-	"account_identifier": "MOCK-ACCOUNT",
-	"category_identifier": "CATEGORY-01",
-	"category_name": "CATEGORY NAME 01"
+    "account_identifier": "MOCK-ACCOUNT",
+    "category_identifier": "CATEGORY-01",
+    "category_name": "CATEGORY NAME 01"
 }
 ```
 
@@ -38,9 +38,9 @@ All fields example:
 
 ```json
 {
-	"account_identifier": "MOCK-ACCOUNT",
-	"category_identifier": "CATEGORY-02",
-	"category_name": "CATEGORY NAME 02",
+    "account_identifier": "MOCK-ACCOUNT",
+    "category_identifier": "CATEGORY-02",
+    "category_name": "CATEGORY NAME 02",
     "category_description": "ANY DESCRIPTION HERE"
 }
 ```
