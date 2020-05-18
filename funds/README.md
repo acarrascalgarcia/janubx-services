@@ -7,4 +7,4 @@ is running on 'the-url-for-this-services'.
 
 Each endpoint manipulates or displays information related to the Funds:
 
-* [Create Fund](docs/funds/creade_fund.md): `POST /<:stage>/funds`
+* [Create Fund](docs/funds/create_fund.md): `POST /<:stage>/funds`
