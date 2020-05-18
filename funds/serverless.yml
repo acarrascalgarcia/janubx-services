@@ -22,7 +22,10 @@ provider:
   region: us-east-1
   stage: test
   environment:
+    BASE_URL: {"Fn::Join": ["", ["https://", {"Ref": "ApiGatewayRestApi"}, ".execute-api.${self:provider.region}.amazonaws.com/${opt:stage, self:provider.stage}"]]}
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}-table
+    SETUP_BUCKET: ${self:service}-${opt:stage, self:provider.stage}-setup-bucket
+    SERVICE_VERSION: v1
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -34,6 +37,12 @@ provider:
         - dynamodb:DeleteItem
         - dynamodb:DescribeTable
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource:
+        - "arn:aws:s3:::${self:provider.environment.SETUP_BUCKET}"
+        - "arn:aws:s3:::${self:provider.environment.SETUP_BUCKET}/*"
 
 functions:
   ping:
@@ -43,6 +52,22 @@ functions:
           path: ping
           method: get
           cors: true
+  populate-currencies-task:
+    handler: apps.currencies.cron.populate_currencies
+    events:
+      - schedule: cron(5 6 1 * ? *)
+  create-funds-service:
+    handler: apps.funds.api.create_fund
+    events:
+      - http:
+          path: funds
+          method: post
+          cors: true
+          integration: lambda
+          response:
+            headers:
+              Content-Type: "'application/json'"
+            template: $input.json('$.body')
 
 resources:
   Resources:
@@ -64,3 +89,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
+    FundsSetupS3Bucket:
+      Type: 'AWS::S3::Bucket'
+      Properties:
+        BucketName: ${self:provider.environment.SETUP_BUCKET}
