@@ -22,7 +22,6 @@ node_modules/**
 .idea/**
 .requirements/**
 env/**
-README.md
 package.json
 package-lock.json
 requirements.txt

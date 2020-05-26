@@ -22,7 +22,10 @@ provider:
   region: us-east-1
   stage: test
   environment:
+    BASE_URL: {"Fn::Join": ["", ["https://", {"Ref": "ApiGatewayRestApi"}, ".execute-api.${self:provider.region}.amazonaws.com/${opt:stage, self:provider.stage}"]]}
+    DYNAMODB_LSI: ${self:service}-${opt:stage, self:provider.stage}-lsi
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}-table
+    SERVICE_VERSION: v1
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -43,6 +46,18 @@ functions:
           path: ping
           method: get
           cors: true
+  create-transactions-service:
+    handler: apps.transactions.api.create_transaction
+    events:
+      - http:
+          path: transactions
+          method: post
+          cors: true
+          integration: lambda
+          response:
+            headers:
+              Content-Type: "'application/json'"
+            template: $input.json('$.body')
 
 resources:
   Resources:
@@ -56,6 +71,8 @@ resources:
             AttributeType: S
           - AttributeName: sk
             AttributeType: S
+          - AttributeName: lsi
+            AttributeType: S
         KeySchema:
           - AttributeName: pk
             KeyType: HASH
@@ -64,3 +81,12 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
+        LocalSecondaryIndexes:
+        - IndexName: ${self:provider.environment.DYNAMODB_LSI}
+          KeySchema:
+          - AttributeName: pk
+            KeyType: HASH
+          - AttributeName: lsi
+            KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
