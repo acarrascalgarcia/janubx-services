@@ -7,7 +7,7 @@ from apps.utils.models import BaseModel
 class CategoryModel(BaseModel):
     """
     - pk: {PK_PREFIX}#{ACCOUNT_IDENTIFIER}
-    - sk: {SK_PREFIX}#{CATEGORY_ABBR}
+    - sk: {SK_PREFIX}#{CATEGORY_IDENTIFIER}
     """
 
     class Meta:
