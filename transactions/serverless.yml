@@ -7,6 +7,7 @@ plugins:
 
 package:
   exclude:
+    - local/**
     - node_modules/**
     - .idea/**
     - .requirements/**
