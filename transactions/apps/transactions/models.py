@@ -23,7 +23,7 @@ class TransactionLSIIndex(LocalSecondaryIndex, PKMixin):
 class TransactionModel(BaseModel):
     """
     - pk: {PK_PREFIX}#{ACCOUNT_IDENTIFIER}
-    - sk: {SK_PREFIX}#{TRANSACTION_DATE}
+    - sk: {SK_PREFIX}#{TRANSACTION_DATE}#{TRANSACTION_IDENTIFIER}
     """
 
     class Meta:

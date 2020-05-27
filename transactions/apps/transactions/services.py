@@ -16,12 +16,15 @@ def create_transaction(
         transaction_date: date,
         category_name: str
 ) -> Dict[str, Any]:
-    formatted_date = transaction_date.strftime('%Y-%m-%d')
-    pk = f'{TransactionModel.PK_PREFIX}#{account_identifier}'
-    sk = f'{TransactionModel.SK_PREFIX}#{formatted_date}'
-    lsi = f'{TransactionModel.LSI_PREFIX}#{category_identifier}'
 
     transaction_identifier = uuid4().hex
+    formatted_date = transaction_date.strftime('%Y-%m-%d')
+    pk = f'{TransactionModel.PK_PREFIX}#{account_identifier}'
+    sk = (
+        f'{TransactionModel.SK_PREFIX}#'
+        f'{formatted_date}#{transaction_identifier}'
+    )
+    lsi = f'{TransactionModel.LSI_PREFIX}#{category_identifier}'
 
     attrs = {
         'pk': pk,
