@@ -28,10 +28,10 @@ Minimal fields example:
 
 ```json
 {
-    "account_identifier": "MOCK-ACCOUNT",
-    "fund_identifier": "FUND-01", 
-    "fund_name": "FUND NAME 01", 
-    "currency_code": "COP"
+	"account_identifier": "ACCOUNT-ID",
+	"fund_identifier": "FUND-ID", 
+	"fund_name": "ANY FUND NAME", 
+	"currency_code": "COP"
 }
 ```
 
@@ -40,11 +40,11 @@ All fields example:
 
 ```json
 {
-    "account_identifier": "MOCK-ACCOUNT",
-    "fund_identifier": "FUND-02", 
-    "fund_name": "FUND NAME 02", 
-    "currency_code": "COP",
-    "fund_description": "ANY DESCRIPTION HERE"
+	"account_identifier": "ACCOUNT-ID",
+	"fund_identifier": "FUND-ID", 
+	"fund_name": "ANY FUND NAME", 
+	"currency_code": "COP",
+    "fund_description": "ANY FUND DESCRIPTION"
 }
 ```
 
@@ -59,17 +59,17 @@ All fields example:
 ```json
 {
     "links": {
-        "self": "any-url/test/funds"
+        "self": "any-url/stage/funds"
     },
     "data": {
         "type": "funds",
-        "id": "FUND-01",
+        "id": "FUND-ID",
         "attributes": {
-            "account_identifier": "MOCK-ACCOUNT",
+            "account_identifier": "ACCOUNT-ID",
             "currency_code": "COP",
-            "fund_name": "FUND NAME 01",
+            "fund_name": "ANY FUND NAME",
             "fund_description": null,
-            "fund_identifier": "FUND-01"
+            "fund_identifier": "FUND-ID"
         }
     }
 }
