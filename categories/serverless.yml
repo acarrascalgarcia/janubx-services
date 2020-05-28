@@ -7,6 +7,7 @@ plugins:
 
 package:
   exclude:
+    - local/**
     - node_modules/**
     - .idea/**
     - .requirements/**
@@ -20,7 +21,7 @@ provider:
   name: aws
   runtime: python3.8
   region: us-east-1
-  stage: test
+  stage: dev
   environment:
     BASE_URL: {"Fn::Join": ["", ["https://", {"Ref": "ApiGatewayRestApi"}, ".execute-api.${self:provider.region}.amazonaws.com/${opt:stage, self:provider.stage}"]]}
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}-table
@@ -76,5 +77,5 @@ resources:
           - AttributeName: sk
             KeyType: RANGE
         ProvisionedThroughput:
-          ReadCapacityUnits: 5
-          WriteCapacityUnits: 5
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
