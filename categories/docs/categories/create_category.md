@@ -55,7 +55,7 @@ All fields example:
 ```json
 {
     "links": {
-        "self": "any-url/test/categories"
+        "self": "any-url/stage/categories"
     },
     "data": {
         "type": "categories",
