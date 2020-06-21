@@ -95,3 +95,11 @@ resources:
       Type: 'AWS::S3::Bucket'
       Properties:
         BucketName: ${self:provider.environment.SETUP_BUCKET}
+
+Outputs:
+  ServiceUrl:
+    Description: Url for fund services
+    Value:
+      'Fn::GetAtt': [apiGateway, Url]
+    Export:
+      Name: ${self:provider}:${opt:stage, self:provider.stage}:${self:service}-ServiceUrl
