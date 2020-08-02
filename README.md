@@ -2,7 +2,7 @@
 
 The server side for my personal financial system. 
 
-### Funds related
+### Docs reference
 
 * Accounts
 * [Categories](categories/README.md)
