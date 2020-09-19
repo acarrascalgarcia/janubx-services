@@ -1,6 +1,6 @@
 # Janub X - Services
 
-The server side for my personal financial system. 
+The server side for a personal project. 
 
 ### Docs reference
 
