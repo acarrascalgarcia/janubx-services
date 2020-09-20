@@ -14,7 +14,7 @@ def get_object_body_from_s3(
     bucket: Optional[str] = None,
 ) -> StreamingBody:
 
-    bucket = bucket or cons.SETUP_BUCKET
+    bucket = bucket or SETUP_BUCKET
 
     s3 = boto3.resource('s3')
     obj = s3.Object(bucket, key)
