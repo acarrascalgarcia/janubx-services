@@ -8,7 +8,7 @@ from boto3.resources.base import ServiceResource
 from .constants import SETUP_BUCKET
 
 
-def get_body_object_from_s3(
+def get_object_body_from_s3(
     *,
     key: str,
     bucket: Optional[str] = None,
