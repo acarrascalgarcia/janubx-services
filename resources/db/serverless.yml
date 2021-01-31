@@ -1,0 +1,54 @@
+service: janubx
+
+frameworkVersion: ">=2.0.0 <=2.30.0"
+
+package:
+  exclude:
+    - local/**
+    - node_modules/**
+    - .idea/**
+    - .requirements/**
+    - env/**
+    - README.md
+    - package.json
+    - package-lock.json
+    - requirements.txt
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: us-east-1
+  stage: dev
+  lambdaHashingVersion: 20201221
+
+resources:
+  Resources:
+    TransactionsDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        TableName: ${self:service}-${opt:stage, self:provider.stage}-table
+        AttributeDefinitions:
+          - AttributeName: pk
+            AttributeType: S
+          - AttributeName: sk
+            AttributeType: S
+          - AttributeName: lsi
+            AttributeType: S
+        KeySchema:
+          - AttributeName: pk
+            KeyType: HASH
+          - AttributeName: sk
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        LocalSecondaryIndexes:
+        - IndexName: ${self:service}-${opt:stage, self:provider.stage}-lsi
+          KeySchema:
+          - AttributeName: pk
+            KeyType: HASH
+          - AttributeName: lsi
+            KeyType: RANGE
+          Projection:
+            ProjectionType: ALL

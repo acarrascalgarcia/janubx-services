@@ -1,0 +1,30 @@
+service: janubx
+
+frameworkVersion: ">=2.0.0 <=2.30.0"
+
+package:
+  exclude:
+    - local/**
+    - node_modules/**
+    - .idea/**
+    - .requirements/**
+    - env/**
+    - README.md
+    - package.json
+    - package-lock.json
+    - requirements.txt
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: us-east-1
+  stage: dev
+  lambdaHashingVersion: 20201221
+
+outputs:
+  ApiId:
+    Ref: ApiGatewayRestApi
+  ApiResourceId:
+    Fn::GetAtt:
+    - ApiGatewayRestApi
+    - RootResourceId
