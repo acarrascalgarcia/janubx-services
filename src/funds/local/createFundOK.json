@@ -1,8 +1,0 @@
-{
-  "body": {
-    "fund_identifier": "FUND-ID",
-    "fund_name": "ANY FUND NAME",
-    "account_identifier": "ACCOUNT-ID",
-    "currency_code": "COP"
-  }
-}
